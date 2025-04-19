@@ -1,0 +1,28 @@
+package ma.enset.infoparc.repository;
+
+import ma.enset.infoparc.entities.Computer;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+public interface ComputerRepository extends JpaRepository<Computer, Long> {
+
+    List<Computer> findByNameContains(String name);
+
+    @Query("SELECT c FROM Computer c WHERE c.name LIKE :name")
+    List<Computer> search(@Param("name") String name);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Computer c SET c.name = :name WHERE c.id = :id")
+    int update(@Param("id") Long id, @Param("name") String name);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Computer c WHERE c.id = :id")
+    int delete(@Param("id") Long id);
+}

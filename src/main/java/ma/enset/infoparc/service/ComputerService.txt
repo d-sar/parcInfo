@@ -1,0 +1,27 @@
+package ma.enset.infoparc.web;
+
+import ma.enset.infoparc.entities.Computer;
+import ma.enset.infoparc.repository.ComputerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+//Cette annotation indique que la classe est un contrôleur REST.
+//Elle combine les annotations @Controller et @ResponseBody pour que les objets retournés soient automatiquement convertis en JSON.
+@RestController
+public class ComputerService {
+    @Autowired
+    private ComputerRepository computerRepository;
+    @GetMapping("/computers")
+    public List<Computer> Computers() {
+        return computerRepository.findAll();
+    }
+    @GetMapping("/computers/{id}")
+    public Computer findComputers(@PathVariable Long id) {
+        Computer c = computerRepository.findById(id).orElse(null);
+        return c;
+    }
+}
