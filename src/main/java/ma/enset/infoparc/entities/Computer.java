@@ -15,5 +15,5 @@ public class Computer {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String modele;
+    private String model;
 }

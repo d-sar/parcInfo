@@ -15,8 +15,8 @@ public class ComputerController {
    @Autowired
    private  ComputerService computerService;
 
-   @GetMapping("index")
-   public String index(Model model,
+   @GetMapping("/computers")
+   public String computers(Model model,
                        @RequestParam(defaultValue = "") String keyword,
                        @RequestParam(defaultValue = "0") int page,
                        @RequestParam(defaultValue = "5") int size){
@@ -32,7 +32,7 @@ public class ComputerController {
    @GetMapping("/deleteComputer")
    public String deleteComputer(@RequestParam Long id ,@RequestParam int page,@RequestParam String keyword){
       computerService.deleteComputer(id);
-      return "redirect:/index?page="+page+"&keyword="+keyword;
+      return "redirect:/computers?page="+page+"&keyword="+keyword;
    }
 
 }

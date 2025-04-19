@@ -23,15 +23,15 @@ public class InfoParcApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
                 Computer computer = new Computer();
                 computer.setName("Computer1");
-                computer.setModele("modele1");
+                computer.setModel("modele1");
                 computerRepository.save(computer);
                 Computer computer1 = new Computer();
                 computer1.setName("Computer2");
-                computer1.setModele("modele2");
+                computer1.setModel("modele2");
                 computerRepository.save(computer1);
         Computer computer2 = new Computer();
         computer2.setName("Computer3");
-        computer2.setModele("modele3");
+        computer2.setModel("modele3");
         computerRepository.save(computer2);
 
                 List<Computer> computers = computerRepository.findAll();
