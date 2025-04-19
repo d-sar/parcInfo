@@ -47,5 +47,11 @@ public class ComputerController {
      computerService.saveComputer(computer);
      return "redirect:/computers";
    }
+   @GetMapping("/editComputer")
+   public String editComputer(@RequestParam Long id ,Model model){
+      Computer computer = computerService.getComputerById(id);
+      model.addAttribute("computer",computer);
+      return "editComputer";
+   }
 
 }

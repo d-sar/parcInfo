@@ -29,6 +29,12 @@
                 <td>
                     <a th:href="@{/deleteComputer(id=${computer.id}, page=${currentPage}, keyword=${keyword})}" class="btn btn-danger btn-sm" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
                 </td>
+                <td>
+                    <a  class="btn btn-danger"
+                        th:href="@{/editComputer(id=${computer.id})}">
+                        <i class="bi bi-pencil-square"></i>EDIT
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>

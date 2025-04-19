@@ -28,4 +28,9 @@ public class ComputerService {
          computerRepository.save(computer);
      }
 
+     public Computer getComputerById(Long id) {
+        return computerRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Computer not found"));
+     }
+
 }
