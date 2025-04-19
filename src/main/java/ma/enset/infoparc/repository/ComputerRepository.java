@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ComputerRepository  extends JpaRepository<Computer,Long> {
     Page<Computer>  findByNameContains(String name, Pageable pageable);
-
 }

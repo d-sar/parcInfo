@@ -24,5 +24,8 @@ public class ComputerService {
     public void deleteComputer(Long id) {
         computerRepository.deleteById(id);
     }
+     public void saveComputer(Computer computer) {
+         computerRepository.save(computer);
+     }
 
 }

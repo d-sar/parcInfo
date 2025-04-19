@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -33,6 +35,17 @@ public class ComputerController {
    public String deleteComputer(@RequestParam Long id ,@RequestParam int page,@RequestParam String keyword){
       computerService.deleteComputer(id);
       return "redirect:/computers?page="+page+"&keyword="+keyword;
+   }
+
+   @GetMapping("/formComputer")
+   public String showformComputer(Model model){
+      model.addAttribute("computer", new Computer());
+      return "formComputer";
+   }
+   @PostMapping("/saveComputer")
+   public String saveComputer(@ModelAttribute Computer computer){
+     computerService.saveComputer(computer);
+     return "redirect:/computers";
    }
 
 }

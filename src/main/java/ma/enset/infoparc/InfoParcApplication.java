@@ -36,8 +36,7 @@ public class InfoParcApplication implements CommandLineRunner {
 
                 List<Computer> computers = computerRepository.findAll();
                 computers.forEach(System.out::println);
-                Computer c =computerRepository.findById(Long.valueOf(1)).get();
-                System.out.println(c.getName());
+
 
         }
     }

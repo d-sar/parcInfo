@@ -6,45 +6,50 @@
     <title>Hospital</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"/>
-
     <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top" >
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">parcInfo</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">parcInfo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="bi bi-house nav-link active" th:href="@{/index}">Home</a>
+                    <a class="nav-link active" th:href="@{/computers}">
+                        <i class="bi bi-house"></i> Home
+                    </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Computers</a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Computers
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/form}">New</a></li>
-                        <li><a class="dropdown-item" th:href="@{/index}">Search</a></li>
+                        <li><a class="dropdown-item" th:href="@{/formComputer}">New</a></li>
+                        <li><a class="dropdown-item" th:href="@{/computers}">Search</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Componnets</a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Components
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/form}">New</a></li>
-                        <li><a class="dropdown-item" th:href="@{/index}">Search</a></li>
+                        <li><a class="dropdown-item" th:href="@{/formComputer}">New</a></li>
+                        <li><a class="dropdown-item" th:href="@{/computers}">Search</a></li>
                     </ul>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-
+            <ul class="navbar-nav ms-auto">
+                <!-- Right-aligned links if needed -->
             </ul>
         </div>
     </div>
+</nav>
+<div class="container mt-4" layout:fragment="content">
+    <!-- Default content if not overridden -->
 </div>
 </body>
 </html>
