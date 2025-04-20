@@ -6,15 +6,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class Computer {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Component {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+    private String brand;
     private String model;
-    @ManyToMany (fetch = FetchType.EAGER)
-    private List<Component> components;
+    private String serialNumber;
+    @Enumerated(EnumType.STRING)
+    private ComponentType type;
+
 }

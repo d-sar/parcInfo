@@ -2,6 +2,7 @@ package ma.enset.infoparc;
 
 import ma.enset.infoparc.entities.Computer;
 import ma.enset.infoparc.repository.ComputerRepository;
+import ma.enset.infoparc.security.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -45,12 +46,12 @@ public class InfoParcApplication implements CommandLineRunner {
 
         }
         //InMemomy Authentication:
-        @Bean
+         @Bean
         PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
         }
         //jdbc Authentication
-        @Bean
+       // @Bean
         CommandLineRunner commandLineRunner(JdbcUserDetailsManager jdbcUserDetailsManager) {
             PasswordEncoder passwordEncoder = passwordEncoder();
             return args -> {
@@ -71,6 +72,18 @@ public class InfoParcApplication implements CommandLineRunner {
                 }
             };
         }
+        //userDetails Service kandiro biha okantfiwha
+   // @Bean
+    CommandLineRunner commandLineRunnerUserDetails(AccountService accountService) {
+        return args -> {
+            accountService.addNewRole("USER");
+            accountService.addNewRole("ADMIN");
+            accountService.addNewUser("user3Details","1234","user1@gmail.com","1234");
+            accountService.addNewUser("user4Details","1234","user2@gmail.com","1234");
+            accountService.addRoleToUser("user3Details","USER");
+            accountService.addRoleToUser("user4Details","ADMIN");
+        };
+    }
 
 }
 

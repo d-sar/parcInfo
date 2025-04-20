@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template.html">
+<head>
+    <title>Liste des Components</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>Components list</h2>
+    <form method="get" th:action="@{/user/components}">
+        <div class="input-group mb-3">
+            <input type="text" name="keyword" th:value="${keyword}" class="form-control" placeholder="search by name">
+            <button class="btn btn-outline-secondary" type="submit">Rechercher</button>
+        </div>
+    </form>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>NAME</th>
+            <th>brand</th>
+            <th>MODEL</th>
+            <th>serial</th>
+            <th>type</th>
+            <th th:if="${#authorization.expression('hasRole(''ADMIN'')')}">ACTIONS</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="component : ${listcomponents}">
+            <td th:text="${component.name}">Name</td>
+            <td th:text="${component.brand}">brand</td>
+            <td th:text="${component.model}">Model</td>
+            <td th:text="${component.serialNumber}">N</td>
+            <td th:text="${component.type}">type</td>
+            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                <a th:href="@{/admin/deleteComponent(id=${component.id}, page=${currentPage}, keyword=${keyword})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
+                <a class="btn btn-primary ms-2"
+                   th:href="@{/admin/editComponent(id=${component.id})}">
+                    <i class="bi bi-pencil-square"></i> EDIT
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/user/components(page=${currentPage - 1}, keyword=${keyword})}">Précédent</a>
+            </li>
+            <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage} ? 'active'">
+                <a class="page-link" th:href="@{/user/components(page=${i}, keyword=${keyword})}" th:text="${i + 1}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                <a class="page-link" th:href="@{/user/components(page=${currentPage + 1}, keyword=${keyword})}">Suivant</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>
