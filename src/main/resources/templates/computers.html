@@ -26,12 +26,12 @@
             <tr  th:each="computer : ${listcomputers}">
                 <td th:text="${computer.name}">Name</td>
                 <td th:text="${computer.model}">Model</td>
-                <td>
-                    <a th:href="@{/deleteComputer(id=${computer.id}, page=${currentPage}, keyword=${keyword})}" class="btn btn-danger btn-sm" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
+                <td  th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <a th:href="@{/admin/deleteComputer(id=${computer.id}, page=${currentPage}, keyword=${keyword})}" class="btn btn-danger btn-sm" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
                 </td>
-                <td>
+                <td  th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                     <a  class="btn btn-danger"
-                        th:href="@{/editComputer(id=${computer.id})}">
+                        th:href="@{/admin/editComputer(id=${computer.id})}">
                         <i class="bi bi-pencil-square"></i>EDIT
                     </a>
                 </td>

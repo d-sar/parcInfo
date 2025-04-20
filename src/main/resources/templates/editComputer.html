@@ -9,7 +9,7 @@
 <body >
 <div layout:fragment="content">
     <h2>Edit computer</h2>
-    <form th:action="@{/saveComputer}" th:object="${computer}" method="post">
+    <form th:action="@{/admin/saveComputer}" th:object="${computer}" method="post">
         <input type="hidden" th:field="*{id}"/>
         <label>Name:</label>
         <input type="text" th:field="*{name}" required/><br/>

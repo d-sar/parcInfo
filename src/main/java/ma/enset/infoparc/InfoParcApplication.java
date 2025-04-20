@@ -7,14 +7,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
-import java.util.List;
+
 
 @SpringBootApplication
 public class InfoParcApplication implements CommandLineRunner {
-
     @Autowired
     private ComputerRepository computerRepository;
     public static void main(String[] args) {
@@ -36,9 +38,9 @@ public class InfoParcApplication implements CommandLineRunner {
         computer2.setName("Computer3");
         computer2.setModel("modele3");
         computerRepository.save(computer2);
-
-                List<Computer> computers = computerRepository.findAll();
-                computers.forEach(System.out::println);
+//
+//                List<Computer> computers = computerRepository.findAll();
+//                computers.forEach(System.out::println);
 
 
         }
@@ -47,5 +49,28 @@ public class InfoParcApplication implements CommandLineRunner {
         PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
         }
-    }
+        //jdbc Authentication
+        @Bean
+        CommandLineRunner commandLineRunner(JdbcUserDetailsManager jdbcUserDetailsManager) {
+            PasswordEncoder passwordEncoder = passwordEncoder();
+            return args -> {
+                if (!jdbcUserDetailsManager.userExists("user1")) {
+                    jdbcUserDetailsManager.createUser(
+                            User.withUsername("user1")
+                                    .password(passwordEncoder.encode("1234"))
+                                    .roles("USER")
+                                    .build());
+                }
+
+                if (!jdbcUserDetailsManager.userExists("admin")) {
+                    jdbcUserDetailsManager.createUser(
+                            User.withUsername("admin")
+                                    .password(passwordEncoder.encode("1234"))
+                                    .roles("USER")
+                                    .build());
+                }
+            };
+        }
+
+}
 
